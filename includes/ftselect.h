@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ftselect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kube <kube@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 14:57:15 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/07 19:23:59 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/07 23:32:56 by kube             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <termcap.h>
 # include <termios.h>
+# include <signal.h>
 # include <libft.h>
 
 typedef struct				s_select_item
@@ -40,4 +41,10 @@ void			move_cursor_rel(int x, int y);
 void			delete_current_item(t_selector *selector);
 void			draw_item(t_select_item *item, t_select_item *cursor);
 void			display_list(t_selector *selector);
+int				init_display(struct termios *term);
+void			reset_default_display(struct termios *term);
+struct termios	*get_term();
+void			sig_handler(int signo);
+int				check_keyboard(t_selector *selector);
+
 #endif

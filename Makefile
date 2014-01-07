@@ -6,7 +6,7 @@
 #    By: kube <kube@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/14 02:31:26 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/01/07 22:42:42 by kube             ###   ########.fr        #
+#    Updated: 2014/01/07 23:16:03 by kube             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ CFLAGS = -Wall -Wextra -Werror -pedantic
 SRC	=	main.c			\
 		selector.c		\
 		cursor.c		\
+		display.c		\
+		keyboard.c		\
 		draw.c
 
 OSRC = $(SRC:.c=.o)
