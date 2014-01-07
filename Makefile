@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
+#    By: kube <kube@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/14 02:31:26 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/01/07 19:30:59 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/01/07 22:42:42 by kube             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFOLDERS = -L./libft/
 LIBS = -ltermcap -lft
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O4 -pedantic
+CFLAGS = -Wall -Wextra -Werror -pedantic
 
 SRC	=	main.c			\
 		selector.c		\
