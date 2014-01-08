@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   selector.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kube <kube@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 15:02:13 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/07 19:23:36 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/08 02:23:59 by kube             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,19 @@ void					delete_current_item(t_selector *selector)
 		toremove->prev->next = selector->cursor;
 		if (toremove == selector->item_list)
 			selector->item_list = toremove->next;
+		selector->list_length -= 1;
+		selector->cursor_index %= selector->list_length;
 	}
 	else
 		selector->item_list = NULL;
 	free(toremove);
 }
 
-t_selector				*load_selector(int length, char **items)
+void					load_selector(t_selector *selector, int length,
+										char **items)
 {
-	t_selector		*selector;
-
-	selector = (t_selector*)malloc(sizeof(t_selector));
 	selector->item_list = load_selector_items(length, items);
 	selector->cursor = selector->item_list;
-	return (selector);
+	selector->list_length = length;
+	selector->cursor_index = 0;
 }
