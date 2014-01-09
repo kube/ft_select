@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 23:13:36 by kube              #+#    #+#             */
-/*   Updated: 2014/01/09 13:48:31 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 19:40:59 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ int						check_keyboard(t_selector *selector)
 	}
 	if (key == 10)
 		return_selected(selector);
-	if (key == 27)
-		return (0);
 	if (key == 32)
 		select_current_item(selector);
 	if (key == 2117294875 || key == 127)
 		delete_current_item(selector);
+	if (key == 27)
+		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 15:02:13 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/09 13:23:59 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 18:32:43 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void				add_item_to_list(t_select_item **item_list, char *text)
 		(*item_list)->prev->next = item;
 		(*item_list)->prev = item;
 	}
+	if ((int)(ft_strlen(text) + COL_SEPARATOR) > get_selector()->col_width)
+		get_selector()->col_width = ft_strlen(text) + COL_SEPARATOR;
 }
 
 static t_select_item	*load_selector_items(int length, char **items)
@@ -60,6 +62,7 @@ static t_select_item	*load_selector_items(int length, char **items)
 void					load_selector(t_selector *selector, int length,
 										char **items)
 {
+	selector->col_width = 0;
 	selector->item_list = load_selector_items(length, items);
 	selector->cursor = selector->item_list;
 	selector->list_length = length;

@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 14:57:15 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/09 13:52:40 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 18:33:52 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <signal.h>
 # include <libft.h>
 # include <sys/ioctl.h>
+
+# define COL_SEPARATOR 2
 
 typedef struct				s_select_item
 {
@@ -40,6 +42,7 @@ typedef	struct				s_selector
 	t_select_item			*item_list;
 	t_select_item			*cursor;
 	int						list_length;
+	int						col_width;
 	int						cursor_index;
 }							t_selector;
 
@@ -52,7 +55,7 @@ void			move_cursor_abs(unsigned int x, unsigned int y);
 void			move_cursor_rel(int x, int y);
 void			move_cursor_rel(int x, int y);
 void			delete_current_item(t_selector *selector);
-void			draw_item(t_selector *selector, t_select_item *item, int fd);
+void			draw_item(t_selector *selector, t_select_item *item);
 void			draw_list(t_selector *selector);
 int				init_display(struct termios *term);
 void			reset_default_display(struct termios *term);

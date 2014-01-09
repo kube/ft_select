@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 23:11:37 by kube              #+#    #+#             */
-/*   Updated: 2014/01/09 14:05:01 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 18:38:50 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void					update_size(t_selector *selector)
 	ioctl(selector->ttyout, TIOCGWINSZ, &w);
 	selector->width = w.ws_col;
 	selector->height = w.ws_row;
+	selector->x = 0;
 	selector->y = (selector->height - selector->list_length) / 2;
 	draw_list(selector);
 }
