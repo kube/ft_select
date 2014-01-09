@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   selector.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kube <kube@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 15:02:13 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/08 02:23:59 by kube             ###   ########.fr       */
+/*   Updated: 2014/01/08 22:04:30 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,6 @@ static t_select_item	*load_selector_items(int length, char **items)
 	return (selector_item_list);
 }
 
-void					delete_current_item(t_selector *selector)
-{
-	t_select_item		*toremove;
-
-	toremove = selector->cursor;
-	if (selector->cursor != selector->cursor->next)
-	{
-		selector->cursor = selector->cursor->next;
-		selector->cursor->prev = toremove->prev;
-		toremove->prev->next = selector->cursor;
-		if (toremove == selector->item_list)
-			selector->item_list = toremove->next;
-		selector->list_length -= 1;
-		selector->cursor_index %= selector->list_length;
-	}
-	else
-		selector->item_list = NULL;
-	free(toremove);
-}
-
 void					load_selector(t_selector *selector, int length,
 										char **items)
 {
@@ -84,4 +64,6 @@ void					load_selector(t_selector *selector, int length,
 	selector->cursor = selector->item_list;
 	selector->list_length = length;
 	selector->cursor_index = 0;
+	selector->x = 0;
+	selector->y = 10;
 }

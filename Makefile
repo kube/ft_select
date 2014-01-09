@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kube <kube@student.42.fr>                  +#+  +:+       +#+         #
+#    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/14 02:31:26 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/01/07 23:16:03 by kube             ###   ########.fr        #
+#    Updated: 2014/01/08 17:24:56 by cfeijoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRC	=	main.c			\
 		cursor.c		\
 		display.c		\
 		keyboard.c		\
+		signals.c		\
+		return.c		\
 		draw.c
 
 OSRC = $(SRC:.c=.o)
@@ -36,7 +38,7 @@ $(NAME):
 
 updatelibs:
 	cd libft && git pull
-	make -C libft re	
+	make -C libft re
 
 clean:
 	rm -f $(OSRC)
