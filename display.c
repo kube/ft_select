@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 23:11:37 by kube              #+#    #+#             */
-/*   Updated: 2014/01/08 22:01:09 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 14:05:01 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void					reset_default_display(struct termios *term)
 	tputs(tgetstr("ve", NULL), 1, tputs_putchar);
 }
 
-void					update_size()
+void					update_size(t_selector *selector)
 {
 	struct winsize		w;
 
-	ioctl(get_ttyout(), TIOCGWINSZ, &w);
-	get_selector()->width = w.ws_col;
-	get_selector()->height = w.ws_row;
-	draw_list(get_selector());
+	ioctl(selector->ttyout, TIOCGWINSZ, &w);
+	selector->width = w.ws_col;
+	selector->height = w.ws_row;
+	selector->y = (selector->height - selector->list_length) / 2;
+	draw_list(selector);
 }

@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 14:54:30 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/08 22:05:20 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 14:12:29 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int 						main(int argc, char **argv)
 		selector = get_selector();
 		define_ttyout(selector);
 		load_selector(selector, argc - 1, argv + 1);
-		update_size();
+		update_size(selector);
 		while (check_keyboard(selector) && selector->item_list)
 		{
 			draw_list(selector);

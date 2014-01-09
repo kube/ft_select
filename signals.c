@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/08 16:47:35 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/08 21:59:46 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 14:22:39 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 static void		sig_winch()
 {
-	update_size();
+	update_size(get_selector());
 }
 
 static void		sig_tstp()
 {
-	reset_default_display(get_term());
-	signal(SIGTSTP, SIG_DFL);
-	ioctl(0, TIOCSTI, &get_term()->c_cc[VSUSP]);
+	if (isatty(1))
+	{
+		reset_default_display(get_term());
+		signal(SIGTSTP, SIG_DFL);
+		ioctl(0, TIOCSTI, &get_term()->c_cc[VSUSP]);
+	}
 }
 
 static void		sig_cont()
 {
 	signal(SIGTSTP, sig_tstp);
 	init_display(get_term());
-	update_size();
+	update_size(get_selector());
 }
 
 static void		sig_term()

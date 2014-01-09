@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 23:13:36 by kube              #+#    #+#             */
-/*   Updated: 2014/01/08 22:05:28 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 13:48:31 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void					delete_current_item(t_selector *selector)
 	else
 		selector->item_list = NULL;
 	free(toremove);
+	update_size(selector);
 }
 
 void					select_current_item(t_selector *selector)

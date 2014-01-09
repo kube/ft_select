@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 14:57:15 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/08 21:01:16 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/09 13:52:40 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void			move_cursor_abs(unsigned int x, unsigned int y);
 void			move_cursor_rel(int x, int y);
 void			move_cursor_rel(int x, int y);
 void			delete_current_item(t_selector *selector);
-void			draw_item(t_selector *selector, t_select_item *item,
-							t_select_item *cursor, int fd);
+void			draw_item(t_selector *selector, t_select_item *item, int fd);
 void			draw_list(t_selector *selector);
 int				init_display(struct termios *term);
 void			reset_default_display(struct termios *term);
