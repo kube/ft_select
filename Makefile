@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/14 02:31:26 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/01/08 17:24:56 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/01/12 22:19:38 by cfeijoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC	=	main.c			\
 		keyboard.c		\
 		signals.c		\
 		return.c		\
+		move.c			\
 		draw.c
 
 OSRC = $(SRC:.c=.o)

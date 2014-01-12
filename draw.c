@@ -6,24 +6,28 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 22:53:39 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/09 19:41:02 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/12 22:09:25 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ftselect.h>
 
-static t_select_item	*goto_item(t_select_item *list, int index)
+static void				place_cursor(t_selector *selector, int index)
 {
-	while (index)
-	{
-		list = list->next;
-		index--;
-	}
-	return (list);
+	int					x;
+	int					y;
+
+	x = (index / selector->height) * selector->col_width;
+	y = index % selector->height;
+	move_cursor(x, y);
 }
 
-void					draw_item(t_selector *selector, t_select_item *item)
+void					draw_item(t_selector *selector, t_select_item *item,
+									int index)
 {
+	if (is_too_small(selector))
+		return ;
+	place_cursor(selector, index);
 	if (item == selector->cursor)
 		tputs(tgetstr("us", NULL), 1, tputs_putchar);
 	if (item->selected == 1)
@@ -33,37 +37,20 @@ void					draw_item(t_selector *selector, t_select_item *item)
 	tputs(tgetstr("me", NULL), 1, tputs_putchar);
 }
 
-static void				draw_column(t_selector *selector, int current_index)
-{
-	t_select_item		*current_item;
-
-	current_item = goto_item(selector->item_list, current_index);
-	draw_item(selector, current_item);
-	current_item = current_item->next;
-	current_index = (current_index + 1) % selector->list_length;
-	write(1, "\n", 1);
-	while (current_item != selector->item_list && current_index)
-	{
-		draw_item(selector, current_item);
-		current_item = current_item->next;
-		current_index = (current_index + 1) % selector->list_length;
-		write(1, "\n", 1);
-	}
-}
-
 void					draw_list(t_selector *selector)
 {
 	int					fd;
+	t_select_item		*current_item;
 	int					current_index;
 
 	fd = get_ttyout();
 	current_index = 0;
+	current_item = selector->item_list;
 	tputs(tgetstr("cl", NULL), 1, tputs_putchar);
-	move_cursor_abs(selector->x, selector->y);
 	while (current_index < selector->list_length)
 	{
-		draw_column(selector, current_index);
-		current_index = current_index + selector->height;
-		move_cursor_rel(selector->col_width, -(selector->height - selector->y));
+		draw_item(selector, current_item, current_index);
+		current_item = current_item->next;
+		current_index++;
 	}
 }

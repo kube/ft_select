@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 15:02:13 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/09 18:32:43 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/12 19:55:36 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,31 @@ static void				add_item_to_list(t_select_item **item_list, char *text)
 		get_selector()->col_width = ft_strlen(text) + COL_SEPARATOR;
 }
 
+void					delete_current_item(t_selector *selector)
+{
+	t_select_item		*toremove;
+
+	toremove = selector->cursor;
+	if (selector->cursor != selector->cursor->next)
+	{
+		selector->cursor = selector->cursor->next;
+		selector->cursor->prev = toremove->prev;
+		toremove->prev->next = selector->cursor;
+		if (toremove->next == selector->item_list)
+		{
+			selector->cursor = toremove->prev;
+			selector->cursor_index -= 1;
+		}
+		if (toremove == selector->item_list)
+			selector->item_list = toremove->next;
+		selector->list_length -= 1;
+		update_size(selector);
+	}
+	else
+		selector->item_list = NULL;
+	free(toremove);
+}
+
 static t_select_item	*load_selector_items(int length, char **items)
 {
 	int					i;
@@ -67,6 +92,4 @@ void					load_selector(t_selector *selector, int length,
 	selector->cursor = selector->item_list;
 	selector->list_length = length;
 	selector->cursor_index = 0;
-	selector->x = 0;
-	selector->y = 10;
 }

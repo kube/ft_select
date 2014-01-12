@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 14:57:15 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/09 18:33:52 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/12 22:24:36 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef	struct				s_selector
 	int						ttyout;
 	unsigned int			width;
 	unsigned int			height;
-	unsigned int			x;
-	unsigned int			y;
 	t_select_item			*item_list;
 	t_select_item			*cursor;
 	int						list_length;
@@ -51,11 +49,9 @@ t_selector		*get_selector();
 int				get_ttyout();
 void			load_selector(t_selector *selector, int length, char **items);
 int				tputs_putchar(int c);
-void			move_cursor_abs(unsigned int x, unsigned int y);
-void			move_cursor_rel(int x, int y);
-void			move_cursor_rel(int x, int y);
+void			move_cursor(unsigned int x, unsigned int y);
 void			delete_current_item(t_selector *selector);
-void			draw_item(t_selector *selector, t_select_item *item);
+void			draw_item(t_selector *selector, t_select_item *item, int index);
 void			draw_list(t_selector *selector);
 int				init_display(struct termios *term);
 void			reset_default_display(struct termios *term);
@@ -64,5 +60,10 @@ int				check_keyboard(t_selector *selector);
 void			init_signals();
 void			update_size();
 void			return_selected(t_selector *selector);
+int				is_too_small(t_selector *s);
+void			move_right(t_selector *s);
+void			move_left(t_selector *s);
+void			move_up(t_selector *selector);
+void			move_down(t_selector *selector);
 
 #endif

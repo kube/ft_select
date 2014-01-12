@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 14:54:30 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/09 15:34:57 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/12 22:23:12 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ int 						main(int argc, char **argv)
 		define_ttyout(selector);
 		load_selector(selector, argc - 1, argv + 1);
 		update_size(selector);
-		while (check_keyboard(selector) && selector->item_list)
+		while (check_keyboard(selector))
 		{
-			draw_list(selector);
+			if (!selector->item_list)
+				break ;
 		}
 		reset_default_display(term);
-		ft_putnbr(get_ttyout());
 	}
 	return (0);
 }

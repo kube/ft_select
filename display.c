@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 23:11:37 by kube              #+#    #+#             */
-/*   Updated: 2014/01/09 18:38:50 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/12 21:59:28 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,27 @@ void					reset_default_display(struct termios *term)
 	tputs(tgetstr("ve", NULL), 1, tputs_putchar);
 }
 
-void					update_size(t_selector *selector)
+static void				draw_too_small(t_selector *selector)
+{
+	tputs(tgetstr("cl", NULL), 1, tputs_putchar);
+	move_cursor(selector->width / 2 - 4, selector->height / 2);
+	write(selector->ttyout, "Too small", 9);
+}
+
+int						is_too_small(t_selector *s)
+{
+	return (s->list_length / s->height + 1 > s->width / s->col_width);
+}
+
+void					update_size(t_selector *s)
 {
 	struct winsize		w;
 
-	ioctl(selector->ttyout, TIOCGWINSZ, &w);
-	selector->width = w.ws_col;
-	selector->height = w.ws_row;
-	selector->x = 0;
-	selector->y = (selector->height - selector->list_length) / 2;
-	draw_list(selector);
+	ioctl(s->ttyout, TIOCGWINSZ, &w);
+	s->width = w.ws_col;
+	s->height = w.ws_row;
+	if (is_too_small(s))
+		draw_too_small(s);
+	else
+		draw_list(s);
 }
